@@ -6,10 +6,10 @@ spec:
  generators:
  - list:
      elements:
-     - cluster: cluster-dev
+     - cluster: engineering-dev
        url: https://api.eu-managed01.sandbox135.opentlc.com:6443
-    - cluster: cluster-prod
-      url: https://api.eu-managed02.sandbox135.opentlc.com:6443
+     - cluster: engineering-prod
+       url: https://api.eu-managed02.sandbox135.opentlc.com:6443
  template:
    metadata:
      name: '{{cluster}}-guestbook'
