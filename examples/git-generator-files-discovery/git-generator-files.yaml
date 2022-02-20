@@ -29,36 +29,3 @@ spec:
         #server: '{{cluster.address}}'
         namespace: guestbook
 
-
-
-
-apiVersion: argoproj.io/v1alpha1
-kind: ApplicationSet
-metadata:
- name: guestbook
-spec:
- generators:
- - list:
-     elements:
-     - cluster: engineering-dev
-       url: https://api.eu-managed01.sandbox135.opentlc.com:6443
-     - cluster: engineering-prod
-       url: https://api.eu-managed02.sandbox135.opentlc.com:6443
- template:
-   metadata:
-     name: '{{cluster}}-guestbook'
-   spec:
-     project: default
-     source:
-       repoURL: https://github.com/dewandemo/applicationset.git
-       targetRevision: HEAD
-       path: examples/list-generator/guestbook/{{cluster}}
-     destination:
-       server: '{{url}}'
-       namespace: guestbook-ns
-     syncPolicy:
-       automated:
-        prune: true
-        selfHeal: true
-       syncOptions:
-         - CreateNamespace=true
